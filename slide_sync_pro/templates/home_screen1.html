@@ -1,47 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF File Input</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f4f4f4;
-    }
-    .container {
-        text-align: center;
-    }
-    .file-input {
-        display: block;
-        margin-bottom: 20px;
-    }
-    .submit-btn {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .submit-btn:hover {
-        background-color: #0056b3;
-    }
-</style>
-</head>
-<body>
-<div class="container">
-    <form action="proceed" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="pdfFile" class="file-input" accept=".pdf" required>
-        <button type="submit" class="submit-btn">Submit</button>
-    </form>
-</div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="proceed" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+
+                <label for="pdfFile">Select PDF File:</label>
+                <table>
+                  <tbody>
+                  <tr>
+               <td><input class="form-control" type="file" id="formFile" name="pdfFile" accept=".pdf"></td> 
+              
+                <td><input type="submit" class="pdfbutton" value="Proceed"></td>
+              </tr>
+            </tbody>
+              </table>
+            </form>
+
+{% endblock content %}
