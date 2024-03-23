@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="present" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+                
+                <input type="submit" class="pdfbutton" value="Start">
+            </form>
+
+{% endblock content %}

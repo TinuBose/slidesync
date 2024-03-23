@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slidesynchome</title>
-</head>
-<body>
-    <h1>hello world!!!!!</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="proceed" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+
+                <label for="pdfFile">Select PDF File:</label>
+                <table>
+                  <tbody>
+                  <tr>
+               <td><input class="form-control" type="file" id="formFile" name="pdfFile" accept=".pdf"></td> 
+              
+                <td><input type="submit" class="pdfbutton" value="Proceed"></td>
+              </tr>
+            </tbody>
+              </table>
+            </form>
+
+{% endblock content %}
