@@ -2,6 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from . import models
 from conversion_model import code1
+from presenting_model import code2
+from presenting_model.code2 import cv2
+import keyboard
+from keypress_model.code3 import on_key_press
 
 # Create your views here.
 
@@ -35,4 +39,8 @@ def proceed(request):
     return render(request, "present_page.html")
 
 def present(request):
+    code2.present_slides()  
     return render(request, "home_screen1.html")
+
+
+
