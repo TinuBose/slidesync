@@ -2,6 +2,7 @@ from cvzone.HandTrackingModule import HandDetector
 import cv2
 import os
 import numpy as np
+from slide_sync_app.delete_file import file_delete
 # import speech_recognition as sr
 # Parameters
 
@@ -9,6 +10,7 @@ def present_slides():
     width, height = 1280, 520
     gestureThreshold = 300
     folderPath = "conversion_model\output"
+    
 
     # Camera Setup
     cap = cv2.VideoCapture(0)
@@ -136,9 +138,13 @@ def present_slides():
 
         cv2.imshow("Slides", imgCurrent)
         cv2.imshow("Image", img)
+        
+        
+
 
         key = cv2.waitKey(1)
         if key == ord('q'):
+            cv2.destroyAllWindows()
             break
  
-    cv2.destroyAllWindows()
+    

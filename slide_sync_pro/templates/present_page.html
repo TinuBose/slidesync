@@ -8,11 +8,12 @@
                 
                 <input type="submit" class="pdfbutton" value="Start">
             </form></td>
-            <td><form action="quit" method="post" enctype="multipart/form-data">
-				{% csrf_token %}
-                
-                <input type="submit" class="pdfbutton" value="quit">
-            </form></td>
+            
         </tr>
+        <tr><td>
+            <p>Press 'q' to stop the presentation</p>
+        </td></tr>
         </table>
+        
+        
 {% endblock content %}
