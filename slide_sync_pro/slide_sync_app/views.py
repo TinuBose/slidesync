@@ -6,13 +6,23 @@ from . import models
 from conversion_model import code1
 from presenting_model import code2
 from presenting_model.code2 import cv2
+from .forms import UploadForm
 
 # Create your views here.
+
 
 def home(request):
     return render(request, "home_screen1.html")
 
 def proceed(request):
+    if request.POST:
+        frm = UploadForm(request.POST)
+        if frm.is_valid():
+            frm.save()
+    else:
+        frm = UploadForm
+
+
     folder_path = 'conversion_model\input'  
     the_filename = file_name.get_file_names(folder_path)
     print(the_filename)
@@ -23,9 +33,14 @@ def proceed(request):
 
     return render(request, "present_page.html")
 
-def present(request):
-    code2.present_slides()  
+def present(request): 
     return render(request, "presenting_page.html")
+
+def presenting(request):
+    code2.present_slides()
+    return render(request, "home_screen1.html")
+
+    
 
 
 

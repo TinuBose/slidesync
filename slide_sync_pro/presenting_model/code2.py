@@ -1,8 +1,10 @@
+from urllib import request
 from cvzone.HandTrackingModule import HandDetector
 import cv2
 import os
 import numpy as np
 from slide_sync_app.delete_file import file_delete
+from django.shortcuts import redirect, render
 # import speech_recognition as sr
 # Parameters
 
@@ -139,12 +141,10 @@ def present_slides():
         cv2.imshow("Slides", imgCurrent)
         cv2.imshow("Image", img)
         
-        
 
 
         key = cv2.waitKey(1)
         if key == ord('q'):
-            cv2.destroyAllWindows()
             break
  
-    
+    cv2.destroyAllWindows()
