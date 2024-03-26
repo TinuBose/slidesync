@@ -83,39 +83,6 @@ def present_slides():
                         annotationNumber = -1
                         annotationStart = False
 
-            if fingers == [0, 1, 1, 0, 0]:
-                cv2.circle(imgCurrent, indexFinger, 12, (0, 0, 255), cv2.FILLED)
-
-            if fingers == [0, 1, 0, 0, 0]:
-                if annotationStart is False:
-                    annotationStart = True
-                    annotationNumber += 1
-                    annotations.append([])
-                print(annotationNumber)
-                annotations[annotationNumber].append(indexFinger)
-                cv2.circle(imgCurrent, indexFinger, 12, (0, 0, 255), cv2.FILLED)
-
-            else:
-                annotationStart = False
-
-            if fingers == [0, 1, 1, 1, 0]:
-                if annotations:
-                    annotations.pop(-1)
-                    annotationNumber -= 1
-                    buttonPressed = True
-
-            # Zoom Gesture
-            if fingers == [0, 1, 1, 1, 1]:
-                zoomScale += zoomSpeed
-                print("Zoom In:", zoomScale)
-            if fingers == [1, 1, 1, 1, 1]:
-                zoomScale -= zoomSpeed
-                if zoomScale < 1.0:
-                    zoomScale = 1.0
-                print("Zoom Out:", zoomScale)
-
-        else:
-            annotationStart = False
 
 
         if buttonPressed:
