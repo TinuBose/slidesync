@@ -77,8 +77,11 @@ WSGI_APPLICATION = "slide_sync_pro.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "slidesync_db",
+        "USER" : "postgres",
+        "PASSWORD": "204434",
+        "HOST" : "localhost"
     }
 }
 
@@ -122,6 +125,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+
+MEDIA_URL = "/conversion_model/input/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'conversion_model/input')
 
 
 # Default primary key field type

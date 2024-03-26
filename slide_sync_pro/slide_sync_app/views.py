@@ -1,46 +1,60 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+
+from filename_model import file_name  
 from . import models
 from conversion_model import code1
 from presenting_model import code2
 from presenting_model.code2 import cv2
-import keyboard
-from keypress_model.code3 import on_key_press
+from .forms import UploadForm
+import threading
+
 
 # Create your views here.
 
+
 def home(request):
-    brand1 = models.brands()
-    brand1.name = "maruti suzuki"
-    brand1.available = True
-    
-    brand2 = models.brands()
-    brand2.name = "splendor"
-    brand2.available = False
-
-    brand3 = models.brands()
-    brand3.name = "cycle"
-    brand3.available = True
-
-    brand4 = models.brands()
-    brand4.name = "auto-rickshaw"
-    brand4.available = True
-
-    the_brands = [brand1 , brand2 , brand3 , brand4]
-
-    return render(request, "home_screen1.html", {"the_brands" : the_brands})
+    return render(request, "home_screen1.html")
 
 def proceed(request):
-    pdf_file_path = 'conversion_model\input\BloodLink_50.pdf'
+    if request.POST:
+        frm = UploadForm(request.POST)
+        if frm.is_valid():
+            frm.save()
+    else:
+        frm = UploadForm
+
+
+    folder_path = 'conversion_model\input'  
+    the_filename = file_name.get_file_names(folder_path)
+    print(the_filename)
+    pdf_file_path = 'conversion_model\input\{}'.format(the_filename)
     output_folder_path = 'conversion_model\output'
 
     code1.convert_pdf_to_png(pdf_file_path, output_folder_path, target_width=1280, target_height=720)
 
     return render(request, "present_page.html")
 
-def present(request):
-    code2.present_slides()  
-    return render(request, "home_screen1.html")
+
+def presenting(request):
+    
+    def present_slides_in_thread():
+        print("starting")
+        code2.present_slides()
+        print("end")
+
+
+
+    presentation_thread = threading.Thread(target=present_slides_in_thread)
+    
+  
+    print("starting the thread")
+    presentation_thread.start()
+    
+    return render(request, "presenting_page.html")
+
+
+    
 
 
 
