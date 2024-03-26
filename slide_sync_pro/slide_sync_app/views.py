@@ -7,6 +7,8 @@ from conversion_model import code1
 from presenting_model import code2
 from presenting_model.code2 import cv2
 from .forms import UploadForm
+import threading
+
 
 # Create your views here.
 
@@ -33,12 +35,31 @@ def proceed(request):
 
     return render(request, "present_page.html")
 
-def present(request): 
-    return render(request, "presenting_page.html")
+# def presenting(request): 
+#     return render(request, "presenting_page.html")
+
+# def presenting(request):
+#     code2.present_slides()
+#     return render(request, "home_screen1.html")
 
 def presenting(request):
-    code2.present_slides()
-    return render(request, "home_screen1.html")
+    # Define a function to call code2.present_slides()
+    def present_slides_in_thread():
+        print("starting")
+        code2.present_slides()
+        print("end")
+
+
+    # Create a new thread to execute the function
+    presentation_thread = threading.Thread(target=present_slides_in_thread)
+    
+    # Start the thread
+    print("starting the thread")
+    presentation_thread.start()
+    
+    # Continue with rendering the request
+    return render(request, "presenting_page.html")
+
 
     
 
