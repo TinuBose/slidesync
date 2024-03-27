@@ -18,7 +18,7 @@ import numpy as np
 from slide_sync_app.delete_file import file_delete
 from django.shortcuts import redirect, render
 from empty_folder_model import empty
-
+from django.views.decorators.cache import cache_control 
 
 # Create your views here.
 
@@ -30,6 +30,7 @@ def home(request):
     stop_presentation=False
     return render(request, "home_screen1.html")
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def proceed(request):
     if request.method == 'POST':
         form=UploadForm(request.POST,request.FILES)

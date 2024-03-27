@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<form action="proceed" method="post" enctype="multipart/form-data">
+
+<form action="proceed" method="post" id="form" enctype="multipart/form-data">
 				{% csrf_token %}
 
                 <label for="pdfFile">Select PDF File:</label>
@@ -16,5 +17,26 @@
             </tbody>
               </table>
             </form>
+<script>
+  document.getElementById('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+
+    var fileInput = document.getElementById('formFile');
+    var file = fileInput.files[0];
+
+    if (file && validateDocumentType(file)) {
+        // File is valid, proceed with form submission
+        this.submit();
+    } else {
+        // Invalid file type, show error message to the user
+        alert('Invalid file type. Please upload a PDF file.');
+    }
+});
+
+function validateDocumentType(file) {
+    var validTypes = ['application/pdf']; // Only allow PDF files
+    return validTypes.includes(file.type);
+}
+</script>
 
 {% endblock content %}
