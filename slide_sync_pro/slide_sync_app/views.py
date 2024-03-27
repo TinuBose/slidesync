@@ -8,7 +8,8 @@ from presenting_model import code2
 from presenting_model.code2 import cv2
 from .forms import UploadForm
 import threading
-    
+from django.contrib import admin
+from .models import Uploadfile   
 from urllib import request
 from cvzone.HandTrackingModule import HandDetector
 import cv2
@@ -16,6 +17,7 @@ import os
 import numpy as np
 from slide_sync_app.delete_file import file_delete
 from django.shortcuts import redirect, render
+from empty_folder_model import empty
 
 
 # Create your views here.
@@ -29,23 +31,23 @@ def home(request):
     return render(request, "home_screen1.html")
 
 def proceed(request):
-    if request.POST:
-        frm = UploadForm(request.POST)
-        if frm.is_valid():
-            frm.save()
-    else:
-        frm = UploadForm
+    if request.method == 'POST':
+        form=UploadForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_upload=Uploadfile(upload=request.FILES['upload'])
+            new_upload.save()
+            folder_path = 'conversion_model\input\conversion_model\input'  
+            the_filename = file_name.get_file_names(folder_path)
+            print(the_filename)
+            pdf_file_path = 'conversion_model\input\conversion_model\input\{}'.format(the_filename)
+            output_folder_path = 'conversion_model\output'
 
+            code1.convert_pdf_to_png(pdf_file_path, output_folder_path, target_width=1280, target_height=720)
 
-    folder_path = 'conversion_model\input'  
-    the_filename = file_name.get_file_names(folder_path)
-    print(the_filename)
-    pdf_file_path = 'conversion_model\input\{}'.format(the_filename)
-    output_folder_path = 'conversion_model\output'
-
-    code1.convert_pdf_to_png(pdf_file_path, output_folder_path, target_width=1280, target_height=720)
-
-    return render(request, "present_page.html")
+            return render(request, "present_page.html")
+        else:
+            form=UploadForm()
+            return render(request,'home_screen1.html')
 
 
 def presenting(request):
@@ -179,9 +181,15 @@ def present_slides():
             stop_presentation = True
             break
         if stop_presentation:
+            
             break
+    
  
     cv2.destroyAllWindows()
+    Uploadfile.objects.all().delete()
+    empty.empty_folder('conversion_model\output')
+    empty.empty_folder('conversion_model\input\conversion_model\input')
+    
 
 
 
