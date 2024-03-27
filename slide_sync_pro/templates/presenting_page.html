@@ -2,4 +2,21 @@
 
 {% block content %}
 <p>presenting...</p>
+
+<script>
+    function checkStopPresentation() {
+        fetch('/check_stop_presentation')
+            .then(response => response.json())
+            .then(data => {
+                if (data.stop_presentation) {
+                    window.location.href = '/';
+                }
+            });
+    }
+
+    // Check every 5 seconds
+    setInterval(checkStopPresentation, 5000);
+</script>
 {% endblock content %}
+
+
