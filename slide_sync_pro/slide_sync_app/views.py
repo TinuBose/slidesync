@@ -1,6 +1,5 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-import keyboard
 from filename_model import file_name  
 from . import models
 from conversion_model import code1
@@ -78,7 +77,7 @@ def present_slides():
     global stop_presentation
 
     width, height = 1280, 520
-    gestureThreshold = 300
+    gestureThreshold = 500
     folderPath = "conversion_model\output"
     
 
@@ -152,6 +151,40 @@ def present_slides():
                         annotations = [[]]
                         annotationNumber = -1
                         annotationStart = False
+                if fingers == [0, 1, 1, 0, 0]:
+                    cv2.circle(imgCurrent, indexFinger, 12, (0, 0, 255), cv2.FILLED)
+
+                if fingers == [0, 1, 0, 0, 0]:
+                    if annotationStart is False:
+                        annotationStart = True
+                        annotationNumber += 1
+                        annotations.append([])
+                    print(annotationNumber)
+                    annotations[annotationNumber].append(indexFinger)
+                    cv2.circle(imgCurrent, indexFinger, 12, (0, 0, 255), cv2.FILLED)
+
+                else:
+                    annotationStart = False
+                if fingers == [0, 1, 1, 1, 0]:
+                    if annotations:
+                        annotations.pop(-1)
+                        annotationNumber -= 1
+                        buttonPressed = True
+
+                        # Zoom Gesture
+                if fingers == [0, 1, 1, 1, 1]:
+                    zoomScale += zoomSpeed
+                    print("Zoom In:", zoomScale)
+                if fingers == [1, 1, 1, 1, 1]:
+                    zoomScale -= zoomSpeed
+                    if zoomScale < 1.0:
+                        zoomScale = 1.0
+                    print("Zoom Out:", zoomScale)
+
+
+
+
+                
 
 
 
