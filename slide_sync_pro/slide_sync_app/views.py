@@ -225,5 +225,6 @@ def present_slides():
     empty.empty_folder('conversion_model\input\conversion_model\input')
     
 
-
+def gesture(request):
+    return render(request,"gestures.html")
 
