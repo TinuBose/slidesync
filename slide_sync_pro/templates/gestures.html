@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Slidesync</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+  <style>
+    .card {
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-width: 5px;
+      border-radius: 10px;
+      padding-left: 10px;
+      padding-bottom: 10px;
+      border-color: #ff4f5a;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .card-img-top {
+      width: 143px;
+      height: 203px;
+    }
+
+    .td {
+      width: 100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="">
+            <img src="{% static 'images/logo.png' %}" alt="" />
+            <span>
+              Slide Sync
+            </span>
+          </a>
+
+
+
+      </div>
+
+      </nav>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/right.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+                  <h5 class="card-title"><b>Next Page</b></h5>
+                  <p class="card-text">Use your <i>pinky finger</i> on your right hand to synchronize the next page of
+                    the
+                    presentation.</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <br>
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/left.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+
+                  <h5 class="card-title"><b>Previous Page</b></h5>
+                  <p class="card-text">Use your <i>thumb finger</i> on your right hand to synchronize the previous page
+                    of the
+                    presentation.</p>
+                </td>
+              </tr>
+            </table>
+        
+
+          </div>
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/zoomin.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+
+                  <h5 class="card-title"><b>Zoom In</b></h5>
+                  <p class="card-text">Use your <i>four finger</i> gesture to zoom in the current slide.</p>
+                </td>
+              </tr>
+            </table>
+
+
+            <br>
+
+
+          </div>
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/zoomout.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+
+                  <h5 class="card-title"><b>Zoom Out</b></h5>
+                  <p class="card-text">Use your <i>five finger</i> gesture to zoom out the current slide.</p>
+                </td>
+              </tr>
+            </table>
+
+
+            <br>
+
+
+          </div>
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/cursor.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+
+                  <h5 class="card-title"><b>Marker Tool</b></h5>
+                  <p class="card-text">Use your <i>two finger</i> gesture to introduce and move the pen tool.</p>
+                </td>
+              </tr>
+            </table>
+
+
+
+            <br>
+
+          </div>
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/draw.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+
+                  <h5 class="card-title"><b>Marker</b></h5>
+                  <p class="card-text">Use your <i>index finger</i> to mark on the current slide.</p>
+                </td>
+              </tr>
+            </table>
+
+
+            <br>
+
+
+          </div>
+          <div class="card">
+            <table>
+              <tr>
+                <td class="td">
+                  <img src="{% static 'images/undo.jpg' %}" class="card-img-top" alt="...">
+                </td>
+                <td>
+
+                  <h5 class="card-title"><b>Undo</b></h5>
+                  <p class="card-text">Use your <i>three finger</i> gesture to undo the markings.</p>
+                </td>
+              </tr>
+            </table>
+
+
+
+
+
+          </div>
+        </div>
+
+    </header>
+
+
+</body>
+
+</html>

@@ -6,7 +6,12 @@ import numpy as np
 from slide_sync_app.delete_file import file_delete
 from django.shortcuts import redirect, render
 
+stop_presentation = False
+
 def present_slides():
+
+    global stop_presentation
+
     width, height = 1280, 520
     gestureThreshold = 300
     folderPath = "conversion_model\output"
@@ -109,6 +114,9 @@ def present_slides():
 
         key = cv2.waitKey(1)
         if key == ord('q'):
+            stop_presentation = True
+            break
+        if stop_presentation:
             break
  
     cv2.destroyAllWindows()

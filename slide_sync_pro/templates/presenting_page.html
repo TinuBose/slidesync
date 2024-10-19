@@ -1,5 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>presenting...</p>
+<p id="countdown">Presentation begin in <span id="countdownTimer">17</span> seconds</p>
+    <p id="content"></p>
+
+
+
+<script>
+
+  
+    
+
+
+    function checkStopPresentation() {
+        fetch('/check_stop_presentation')
+            .then(response => response.json())
+            .then(data => {
+                if (data.stop_presentation) {
+                    window.location.href = '/';
+                }
+            });
+    }
+
+    // Check every 5 seconds
+    setInterval(checkStopPresentation, 5000);
+    window.history.forward()
+
+
+
+var countdownTime = 20;
+
+
+// Function to update the countdown display
+function updateCountdownDisplay() {
+    document.getElementById('countdownTimer').textContent = countdownTime;
+}
+
+// Function to change the content and hide the countdown paragraph
+function changeContent() {
+    document.getElementById('content').textContent = 'Presenting...\nPress \'q\' to stop the presentation';
+    document.getElementById('countdown').style.display = 'none'; // Hide the countdown paragraph
+}
+
+// Start the countdown
+function startCountdown() {
+    var countdownInterval = setInterval(function() {
+        countdownTime--;
+        updateCountdownDisplay();
+
+        if (countdownTime <= 0) {
+            clearInterval(countdownInterval);
+            changeContent();
+        }
+    }, 1000);
+}
+
+// Start the countdown when the page loads
+window.onload = startCountdown;
+
+
+
+</script>
 {% endblock content %}
+
+
